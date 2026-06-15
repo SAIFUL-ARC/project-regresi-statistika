@@ -55,3 +55,8 @@ X = penskala.fit_transform(X_Raw)
 
 print(f"[INFO] Bentuk fitur X: {X.shape}")
 print(f"[INFO] Kelas target: {list(encoder.classes_)}")
+
+X_latih, X_uji, y_latih, y_uji = train_test_split(X, y, test_size=0.25, random_state=42, stratify=y)
+
+print(f"[INFO] Data latih: {len(X_latih)} record")
+print(f"[INFO] Data uji: {len(X_uji)} record")
