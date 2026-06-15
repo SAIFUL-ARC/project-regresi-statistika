@@ -30,3 +30,15 @@ FILE_PATH =  "C:/project/project/kekerasan_anak_sulawesi_2023.csv"
 
 df = pd.read_csv(FILE_PATH)
 print(f"[INFO] Total data: {len(df)} record")
+
+# =============================================================================
+# 3. MENENTUKAN FITUR DAN TARGET
+# =============================================================================
+FITUR = [
+    "kekerasan_fisik", "kekerasan_psikis", "kekerasan_seksual",
+    "eksploitasi", "tppo", "penelantaran", "kekerasan_lainnya"
+]
+TARGET = "kategori_risiko"
+
+X_Raw = df[FITUR].values
+y_Raw = df[TARGET].values
