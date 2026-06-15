@@ -1,9 +1,12 @@
 # =============================================================================
-#  TINGKAT KASUS KEKERASAN ANAK DI SULAWESI TENGAH
+#  TINGKAT KASUS KEKERASAN ANAK DI SULAWESI 
 #  Metode: Support Vector Machine (SVM/SVC) — Klasifikasi Kategori Risiko
 #  Dataset: kekerasan_anak_sulawesi_2023.csv
 # =============================================================================
 
+# =============================================================================
+# 1. IMPOR LIBRARY YANG DIBUTUHKAN & PENYESUAIAN TAMPILAN
+# =============================================================================
 import warnings
 import numpy as np
 import pandas as pd
@@ -19,3 +22,11 @@ from sklearn.metrics import (classification_report, confusion_matrix, accuracy_s
 warnings.filterwarnings("ignore")
 sns.set_theme(style="whitegrid", palette="muted", font_scale=1.05)
 plt.rcParams.update({"figure.dpi": 130, "axes.titleweight": "bold"})
+
+# =============================================================================
+# 2. MEMUAT DATA
+# =============================================================================
+FILE_PATH =  "C:/project/project/kekerasan_anak_sulawesi_2023.csv" 
+
+df = pd.read_csv(FILE_PATH)
+print(f"[INFO] Total data: {len(df)} record")
