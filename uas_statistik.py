@@ -42,3 +42,16 @@ TARGET = "kategori_risiko"
 
 X_Raw = df[FITUR].values
 y_Raw = df[TARGET].values
+
+# =============================================================================
+# 4.MEMPROSES DATA
+# =============================================================================
+
+encoder = LabelEncoder()
+y = encoder.fit_transform(y_Raw)
+
+penskala = StandardScaler()
+X = penskala.fit_transform(X_Raw)
+
+print(f"[INFO] Bentuk fitur X: {X.shape}")
+print(f"[INFO] Kelas target: {list(encoder.classes_)}")
