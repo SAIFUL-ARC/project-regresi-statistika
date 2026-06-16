@@ -60,3 +60,28 @@ X_latih, X_uji, y_latih, y_uji = train_test_split(X, y, test_size=0.25, random_s
 
 print(f"[INFO] Data latih: {len(X_latih)} record")
 print(f"[INFO] Data uji: {len(X_uji)} record")
+
+# =============================================================================
+# 5. MEMBUAT MODEL SVM
+# =============================================================================
+
+model_svm = SVC(kernel="rbf", C=10, gamma="scale", probability=True, random_state=42)
+model_svm.fit(X_latih, y_latih)
+
+y_pred = model_svm.predict(X_uji)
+
+akurasi = accuracy_score(y_uji, y_pred)
+
+cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+nilai_cv = cross_val_score(model_svm, X, y, cv=cv, scoring="accuracy")
+
+print("\n" + "=" * 56)
+print("  HASIL EVALUASI MODEL SVM - SULAWESI")
+print("=" * 56)
+print(f"  Akurasi Data Uji      : {akurasi * 100:.2f}%")
+print(f"  Rata-rata CV (5 lipat) : {nilai_cv.mean() * 100:.2f}%")
+print(f"  Standar Deviasi CV    : {nilai_cv.std() * 100:.2f}%")
+print("-" * 56)
+print("\nLAPORAN KLASIFIKASI:")
+print(classification_report(y_uji, y_pred, target_names=encoder.classes_))
+print("=" * 56)
