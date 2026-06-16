@@ -150,3 +150,19 @@ plt.savefig("confusion_matrix_sulawesi.png", bbox_inches="tight", dpi=150, facec
 plt.show()
 
 print("[INFO] Confusion Matrix tersimpan → confusion_matrix_sulawesi.png")
+
+# =============================================================================
+# 10. RINGKASAN STATISTIK
+# =============================================================================
+print("\n" + "=" * 56)
+print("  RINGKASAN STATISTIK KASUS KEKERASAN ANAK")
+print("=" * 56)
+
+for provinsi in df['nama_provinsi'].unique():
+    data_prov = df[df['nama_provinsi'] == provinsi]
+    total = data_prov['total_kasus'].sum()
+    rata_rata = data_prov['total_kasus'].mean()
+    print(f"  {provinsi:20s} : Total={total:4d} kasus, Rata-rata={rata_rata:5.1f}")
+
+print("=" * 56)
+print("[INFO] Analisis selesai!")
