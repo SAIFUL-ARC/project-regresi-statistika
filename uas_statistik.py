@@ -85,3 +85,51 @@ print("-" * 56)
 print("\nLAPORAN KLASIFIKASI:")
 print(classification_report(y_uji, y_pred, target_names=encoder.classes_))
 print("=" * 56)
+
+# =============================================================================
+# 8. VISUALISASI - GRAFIK BATANG TUMPUK PER PROVINSI
+# =============================================================================
+print("\n[INFO] Membuat visualisasi...")
+
+fig, ax = plt.subplots(figsize=(14, 7))
+
+df_provinsi = df.groupby("nama_provinsi")[FITUR].sum()
+df_provinsi_persen = df_provinsi.div(df_provinsi.sum(axis=1), axis=0) * 100
+
+WARNA = ["#2171b5", "#fd8d3c", "#31a354", "#e31a1c", "#c994c7", "#a65628", "#6a51a3"]
+
+df_provinsi_persen.plot(
+    kind="bar", stacked=True, ax=ax,
+    color=WARNA[:len(FITUR)],
+    edgecolor="white", linewidth=0.6, width=0.7
+)
+
+ax.set_title("Proporsi Jenis Kekerasan Anak per Provinsi di Sulawesi (%)",
+              fontsize=14, fontweight="bold", pad=15)
+ax.set_xlabel("Provinsi", fontsize=12, labelpad=10)
+ax.set_ylabel("Persentase (%)", fontsize=12, labelpad=10)
+
+ax.set_ylim(0, 105)
+ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _: f"{v:.0f}%"))
+ax.yaxis.set_major_locator(plt.MultipleLocator(20))
+
+ax.tick_params(axis="x", labelrotation=25, labelsize=10)
+ax.tick_params(axis="y", labelsize=10)
+
+ax.yaxis.grid(True, linestyle="--", linewidth=0.5, alpha=0.6, zorder=0)
+ax.set_axisbelow(True)
+
+ax.spines["top"].set_visible(False)
+ax.spines["right"].set_visible(False)
+
+ax.legend(
+    title="Jenis Kekerasan",
+    bbox_to_anchor=(1.01, 1), loc="upper left",
+    fontsize=9, title_fontsize=10, frameon=False
+)
+
+plt.tight_layout(rect=[0, 0, 0.85, 1])
+plt.savefig("kekerasan_anak_sulawesi.png", bbox_inches="tight", dpi=150, facecolor="white")
+plt.show()
+
+print("[INFO] Plot tersimpan → kekerasan_anak_sulawesi.png")
