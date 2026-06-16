@@ -87,7 +87,7 @@ print(classification_report(y_uji, y_pred, target_names=encoder.classes_))
 print("=" * 56)
 
 # =============================================================================
-# 8. VISUALISASI - GRAFIK BATANG TUMPUK PER PROVINSI
+# 6. VISUALISASI - GRAFIK BATANG TUMPUK PER PROVINSI
 # =============================================================================
 print("\n[INFO] Membuat visualisasi...")
 
@@ -133,3 +133,20 @@ plt.savefig("kekerasan_anak_sulawesi.png", bbox_inches="tight", dpi=150, facecol
 plt.show()
 
 print("[INFO] Plot tersimpan → kekerasan_anak_sulawesi.png")
+
+# =============================================================================
+# 7. VISUALISASI - CONFUSION MATRIX
+# =============================================================================
+fig2, ax2 = plt.subplots(figsize=(7, 5))
+
+cm = confusion_matrix(y_uji, y_pred)
+disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=encoder.classes_)
+disp.plot(ax=ax2, cmap="Blues", values_format="d")
+
+ax2.set_title("Confusion Matrix - Klasifikasi Risiko Kekerasan Anak", fontsize=12, fontweight="bold")
+
+plt.tight_layout()
+plt.savefig("confusion_matrix_sulawesi.png", bbox_inches="tight", dpi=150, facecolor="white")
+plt.show()
+
+print("[INFO] Confusion Matrix tersimpan → confusion_matrix_sulawesi.png")
